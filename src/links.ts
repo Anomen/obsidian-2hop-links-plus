@@ -494,7 +494,7 @@ export class Links {
 
       const fileTags = this.getTagsFromCache(
         cachedMetadata,
-        this.settings.excludePaths
+        this.settings.excludeTags
       );
 
       for (const tag of fileTags) {
