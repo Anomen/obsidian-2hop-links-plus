@@ -108,13 +108,13 @@ export class Links {
       activeFileCache != null &&
       (activeFileCache.links != null ||
         activeFileCache.embeds != null ||
-        activeFileCache.frontmatterLinks != null)
+        (activeFileCache as any).frontmatterLinks != null)
     ) {
       const seen = new Set<string>();
       const linkEntities = [
         ...(activeFileCache.links || []),
         ...(activeFileCache.embeds || []),
-        ...(activeFileCache.frontmatterLinks || []),
+        ...((activeFileCache as any).frontmatterLinks || []),
       ];
 
       for (const it of linkEntities) {
