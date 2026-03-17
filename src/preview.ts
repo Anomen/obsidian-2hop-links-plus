@@ -79,7 +79,9 @@ export async function readPreview(fileEntity: FileEntity) {
   }
 
   const updatedContent = content.replace(/^(.*\n)?---[\s\S]*?---\n?/m, "");
-  const lines = shortenExternalLinkInPreview(updatedContent).split(/\n/);
+  const selectors: string[] = this.settings?.excludeHtmlSelectors || [];
+  const filteredContent = stripHtmlSelectors(updatedContent, selectors);
+  const lines = shortenExternalLinkInPreview(filteredContent).split(/\n/);
   return lines
     .filter((it: string) => {
       return it.match(/\S/) && !it.match(/^#/) && !it.match(/^https?:\/\//);
@@ -104,4 +106,26 @@ export function getThumbnailUrlFromIframeUrl(iframeUrl: string): string | null {
 export function shortenExternalLinkInPreview(content: string): string {
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
   return content.replace(regex, "[$1](...)");
+}
+
+export function stripHtmlSelectors(
+  content: string,
+  selectors: string[]
+): string {
+  const validSelectors = selectors.filter((s) => s.trim().length > 0);
+  if (validSelectors.length === 0) return content;
+
+  const container = document.createElement("div");
+  container.innerHTML = content;
+  for (const selector of validSelectors) {
+    try {
+      container.querySelectorAll(selector).forEach((el) => el.remove());
+    } catch (e) {
+      console.warn(
+        `Invalid CSS selector in excludeHtmlSelectors: "${selector}"`,
+        e
+      );
+    }
+  }
+  return container.innerHTML;
 }

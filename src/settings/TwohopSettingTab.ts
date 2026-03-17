@@ -23,6 +23,7 @@ export interface TwohopPluginSettings {
   frontmatterPropertyKeyAsTitle: string;
   frontmatterKeys: string[];
   showSettingsButton: boolean;
+  excludeHtmlSelectors: string[];
   [key: string]: boolean | string | string[] | number | undefined;
 }
 
@@ -139,6 +140,12 @@ export class TwohopSettingTab extends PluginSettingTab {
       "Set frontmatter property key as title",
       "Set the property key of the frontmatter to be used as the title to be displayed.",
       "frontmatterPropertyKeyAsTitle"
+    );
+    this.createTextAreaSetting(
+      "Exclude HTML Selectors from Preview",
+      "List of CSS selectors whose matching elements will be removed from preview cards, one per line.",
+      "excludeHtmlSelectors",
+      "span.key-navigation\ndiv.metadata"
     );
     this.createToggleSetting(
       "Show Settings Button",

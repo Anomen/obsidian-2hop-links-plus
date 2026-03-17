@@ -22,6 +22,7 @@ export const DEFAULT_SETTINGS: TwohopPluginSettings = {
   frontmatterPropertyKeyAsTitle: "",
   frontmatterKeys: [],
   showSettingsButton: true,
+  excludeHtmlSelectors: [],
 };
 
 export async function loadSettings(
