@@ -22,6 +22,7 @@ export interface TwohopPluginSettings {
   createFilesForMultiLinked: boolean;
   frontmatterPropertyKeyAsTitle: string;
   frontmatterKeys: string[];
+  showSettingsButton: boolean;
   [key: string]: boolean | string | string[] | number | undefined;
 }
 
@@ -138,6 +139,11 @@ export class TwohopSettingTab extends PluginSettingTab {
       "Set frontmatter property key as title",
       "Set the property key of the frontmatter to be used as the title to be displayed.",
       "frontmatterPropertyKeyAsTitle"
+    );
+    this.createToggleSetting(
+      "Show Settings Button",
+      "Show the 'Open Settings' button in the 2hop links panel.",
+      "showSettingsButton"
     );
   }
 

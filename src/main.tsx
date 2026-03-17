@@ -252,6 +252,7 @@ export default class TwohopLinksPlugin extends Plugin {
         autoLoadTwoHopLinks={this.settings.autoLoadTwoHopLinks}
         initialBoxCount={this.settings.initialBoxCount}
         initialSectionCount={this.settings.initialSectionCount}
+        showSettingsButton={this.settings.showSettingsButton}
       />,
       container
     );

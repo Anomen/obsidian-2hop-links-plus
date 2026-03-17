@@ -21,6 +21,7 @@ export const DEFAULT_SETTINGS: TwohopPluginSettings = {
   createFilesForMultiLinked: false,
   frontmatterPropertyKeyAsTitle: "",
   frontmatterKeys: [],
+  showSettingsButton: true,
 };
 
 export async function loadSettings(

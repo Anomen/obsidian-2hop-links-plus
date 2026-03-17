@@ -28,6 +28,7 @@ interface TwohopLinksRootViewProps {
   autoLoadTwoHopLinks: boolean;
   initialBoxCount: number;
   initialSectionCount: number;
+  showSettingsButton: boolean;
 }
 
 type Category =
@@ -168,15 +169,17 @@ export default class TwohopLinksRootView extends React.Component<
 
     return (
       <div>
-        <button
-          className="settings-button"
-          onClick={() => {
-            this.props.app.setting.open();
-            this.props.app.setting.openTabById("2hop-links-plus");
-          }}
-        >
-          Open Settings
-        </button>
+        {this.props.showSettingsButton && (
+          <button
+            className="settings-button"
+            onClick={() => {
+              this.props.app.setting.open();
+              this.props.app.setting.openTabById("2hop-links-plus");
+            }}
+          >
+            Open Settings
+          </button>
+        )}
         {showForwardConnectedLinks && (
           <ConnectedLinksView
             fileEntities={this.props.forwardConnectedLinks}
